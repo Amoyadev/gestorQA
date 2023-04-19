@@ -1,0 +1,44 @@
+{% extends "master.html" %}
+{% load static %}
+{% block title %}
+  Aplicativos con ambientes QA
+{% endblock %}
+
+{% block content %}
+<div class="table-container" style="padding: 6px 3px;">
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar...">
+    <a href="{% url 'download_excel' %}" class="btn btn-primary">Descargar Excel</a>
+  </div>
+  <br>
+  <table class="contenedor_principal">
+    <thead id="'tabla-encabezado'">
+      <tr>
+        <th>ID</th>
+        <th>Nombre Aplicativo</th>
+        <th>Sistema</th>
+        <th>Tipo Servidor</th>
+        <th>Módulo</th>
+        <th>SubMódulo</th>
+      </tr>
+    </thead>
+    <tbody id="tbody tr">
+      {% for x in plataformas %}
+      <tr onclick="window.location = 'detalles/{{ x.id_plataforma }}'">
+        <td>{{ x.id_plataforma }}</td>
+        <td><a>{{ x.nombre_plataforma }}</a></td>
+        <td>{{ x.id_sistema.nombre_sistema }}</td>
+        <td style="text-align: center;"><button style="background-color: #76706E; color: white; padding: 10px 20px; border: none; border-radius: 5px;"
+          onmouseover="this.style.backgroundColor='#375BDC';"
+          onmouseout="this.style.backgroundColor='#76706E';">
+          {{ x.tipo_servidor_plataforma }}</Button></td>
+        <td>{{ x.id_modulo.nombre_modulo }}</td>
+        <td>{{ x.id_submodulo.nombre_submodulo }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div id="resultados-busqueda"></div>
+<script src="{% static 'js/filter.js' %}"></script>
+{% endblock %}

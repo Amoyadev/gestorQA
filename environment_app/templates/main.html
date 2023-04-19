@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Aplicativos QA con ambientes
+{% endblock %}
+
+
+{% block content %}
+{% comment %}   <h1>APLICATIVOS QA</h1>
+
+  <h3>PLATAFORMAS</h3>
+  
+  <p>Consulta los <a href="ambienteQA/">Ambientes QA</a></p> {% endcomment %}
+
+  <div class="main">
+    <h1>APLICATIVOS QA</h1>
+
+    {% comment %} <h4>Bienvenido {{ user.username | upper }}</h4> {% endcomment %}
+
+    {% if request.user.is_authenticated %}
+      Bienvenido {{ user.username | upper }}, 
+    {% endif %}</p>
+      <p>Consulta los <a href="ambienteQA/">Ambientes QA</a></p>
+          
+  </div>
+  
+{% endblock %}

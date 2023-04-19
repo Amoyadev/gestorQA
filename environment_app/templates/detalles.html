@@ -1,0 +1,119 @@
+{% extends "master.html" %}
+
+{% block title %}
+  {{ myplatform.nombre_plataforma }}
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="mycard">
+    <div class="mycard-2">
+    <h1><br>APLICATIVO:<br> {{ myplatform.nombre_plataforma }}</h1>
+    </div>
+    <br>
+    </br>
+    <p><mark>Tipo Plataforma:</mark> {{ myplatform.tipo_servidor_plataforma }}</p>
+    <p><mark>Ambiente:</mark> {{ myplatform.tipo_ambiente_plataforma }}</p>
+    <p><mark>Sistema:</mark> {{ myplatform.id_sistema.nombre_sistema }}</p>
+    {% if myplatform.tipo_motor_bd is not none and myplatform.tipo_motor_bd != "none" %}
+    <p><mark>Tipo Motor BDD:</mark> {{ myplatform.tipo_motor_bd }}</p>
+    {% endif %}
+    {% if myplatform.nombre_esquema_bd is not none and myplatform.nombre_esquema_bd != "none" %}
+    <p><mark>Nombre Esquema BDD:</mark> {{ myplatform.nombre_esquema_bd }}</p>
+    {% endif %}
+    {% if myplatform.nombre_instancia_bd is not none and myplatform.nombre_instancia_bd != "none" %}
+    <p><mark>Nombre Instancia BDD:</mark> {{ myplatform.nombre_instancia_bd }}</p>
+    {% endif %}  
+  </div> 
+
+  <!-- Software -->
+  <div class="mycard" style="background-color: whitesmoke; border-radius: 10px; text-align: center;">
+    <h2 style="color: rgb(0, 0, 0);">DATOS DE SOFTWARE</h2>
+    <table style="border-collapse: collapse;">
+      <thead>
+        <tr style="background-color: #f2f2f2;">
+          <th style="border-radius: 5px;">IP</th>
+          <th style="border-radius: 5px;">PUERTO</th>
+          <th style="border-radius: 5px;">ENDPOINT</th>
+          <th style="border-radius: 5px;">TIPO</th>
+          <th style="border-radius: 5px;">URL</th>
+          <th style="border-radius: 5px;">USER</th>
+          <th style="border-radius: 5px;">PASS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for x in sw %}
+        <tr style="background-color: #ffffff;">
+          <td><p style="color: rgb(75 75 75);">{{ x.ip_sw|default:"No Aplica"}}</p></td>
+          <td><p style="color: rgb(75 75 75);">{{ x.puerto_sw|default:"No Aplica"}}</p></td>
+          <td><p style="color: rgb(75 75 75);">{{ x.endpoint_sw|default:"No Aplica"}}</p></td>
+          <td><p style="color: rgb(75 75 75);">{{ x.tipo_sw|default:"No Aplica"}}</p></td>
+          <td><p style="color: rgb(75 75 75);">{{ x.url_sw|default:"No Aplica"}}</p></td>
+          <td><p style="color: rgb(75 75 75);">{{ x.user_sw|default:"No Aplica"}}</p></td>
+          <td><p style="color: rgb(75 75 75);">{{ x.password_sw|default:"No Aplica"}}</p></td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6">No hay Software registrado en este aplicativo</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+<!-- Hardware  -->
+<div class="mycard" style="background-color: whitesmoke; border-radius: 10px; text-align: center;">
+  <h2 style="color: rgb(0, 0, 0);">
+    DATOS DE HARDWARE
+  </h2>
+  <!-- <br> -->
+  <div class="table-container">
+  <table class="hardware_table">
+      <thead>
+          <tr>
+            <th>IP</th>
+            <th>URL</th>
+            <th>User</th>
+            <th>Password</th>
+            <th>Puerto</th>
+            <th>Direccion Fisica</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for h in hw %}
+          <tr>
+            <td>{{ h.ip_hw }}</td>
+            <td>{{ h.url_hw }}</td>
+            <td>{{ h.user_hw }}</td>
+            <td>{{ h.password_hw }}</td>
+            <td>{{ h.puerto_hw }}</td>
+            <td>{{ h.direccion_fisica }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6">No hay Hardware registrado en este aplicativo</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+</div>
+
+<!-- Botón volver -->
+  <div class="mycard">
+  <button type="button" class="block"><a href="/ambienteQA">VOLVER A AMBIENTES</a></button>
+  </div>
+
+<!--   <script>
+    function resizeDiv() {
+  var tableHeight = document.querySelector(".hardware_table").clientHeight;
+  var tableContainer = document.querySelector(".table-container"); // Cambiar aquí
+  tableContainer.style.height = tableHeight + "px";
+  }
+
+  window.onload = resizeDiv;
+  window.onresize = resizeDiv;
+  </script> -->
+{% endblock %}
